@@ -129,71 +129,73 @@ class EventDetailScreenState extends State<EventDetailScreen> {
 
   get _contentCard => Positioned(
     top: _dimen,
+    bottom: 0,
     child: Container(
-      width: _dimen,
       decoration: BoxDecoration(
         color: Color(0xff212121),
         borderRadius: BorderRadius.vertical(top:Radius.circular(25)),
       ),
-      child: Column(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              height: 2,
-              width : 60,
-              padding:EdgeInsets.only(left: 25, right: 25,top: 10,),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(1)),
-                  color: Colors.white
+      child: SizedBox(
+        width: _dimen,
+        height: double.maxFinite,
+        child: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: 2,
+                width : 60,
+                margin:EdgeInsets.only(left: 25, right: 25,top: 10,),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(1)),
+                    color: Colors.white
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding:EdgeInsets.only(left: 25, right: 25,top: 20, bottom: 30),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                padding:EdgeInsets.only(left: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text(widget.event['duration'], style: TextStyle(color: Colors.indigo, fontSize: 14, ),),
-                        SizedBox(height: 10,),
-                        Text(widget.event['title'], style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),),
-                        SizedBox(height: 6,),
-                        Text(widget.event['venue'], style: TextStyle(color: Colors.white38, fontSize: 14, ),),
+            Padding(
+              padding:EdgeInsets.only(left: 25, right: 25,top: 20, bottom: 30),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                  padding:EdgeInsets.only(left: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(widget.event['duration'], style: TextStyle(color: Colors.indigo, fontSize: 14, ),),
+                          SizedBox(height: 10,),
+                          Text(widget.event['title'], style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),),
+                          SizedBox(height: 6,),
+                          Text(widget.event['venue'], style: TextStyle(color: Colors.white38, fontSize: 14, ),),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 45,
-                  width: 45,
-                  decoration: BoxDecoration(
-                    color: Color(0xff2f2f2f),
-                    borderRadius: BorderRadius.all(Radius.circular(27.5)),
-                  ),
-                  child: Icon(Icons.favorite, color: widget.event['isFav']?Colors.red:Colors.grey,),
-                )
-              ],
+                  Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                      color: Color(0xff2f2f2f),
+                      borderRadius: BorderRadius.all(Radius.circular(27.5)),
+                    ),
+                    child: Icon(Icons.favorite, color: widget.event['isFav']?Colors.red:Colors.grey,),
+                  )
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 100,
-            width: _dimen,
-            child: GoogleMap(
-              onMapCreated: (GoogleMapController controller) =>
-              _mapController = controller,
-              initialCameraPosition:
-              CameraPosition(target: LatLng(40.704026, -74.0655557), zoom: 12, tilt: 90),
-              mapType: MapType.terrain,
-            ),
-          )
-        ],
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: (GoogleMapController controller) =>
+                _mapController = controller,
+                initialCameraPosition:
+                CameraPosition(target: LatLng(40.704026, -74.0655557), zoom: 12, tilt: 90),
+                mapType: MapType.terrain,
+              ),
+            )
+          ],
+        ),
       ),
     ),
   );
